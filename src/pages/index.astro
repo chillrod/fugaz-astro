@@ -1,14 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import HeaderImages from "../components/HeaderImages.astro";
+import MenuIcon from "../components/MenuIcon.astro";
+import BorderContent from "../components/BorderContent.astro";
 import { clients } from "../data/clients";
+import { summarys } from "../data/summarys";
 ---
 
 <Layout title="Fugaz & Co.">
-  <main class="p-6 flex flex-col gap-12">
+  <main class="flex flex-col gap-12">
     <div class="text-orange-600">
       <h1
-        class="text-center font-bold text-[35vw] md:text-[22vw] -tracking-widest leading-[1.5ch]"
+        class="text-center font-bold text-[35vw] md:text-[21vw] -tracking-widest leading-[1.5ch]"
       >
         Fugaz & Co.
       </h1>
@@ -16,22 +19,60 @@ import { clients } from "../data/clients";
         <span>Consultoria gastronomica personalizada.</span>
       </div>
     </div>
-    <HeaderImages />
-    <div>
+    <BorderContent>
+      <HeaderImages />
+    </BorderContent>
+  </main>
+  <BorderContent>
+    <h2
+      class="text-center font-bold text-[10vw] -tracking-wider leading-[1.5ch]"
+    >
+      Clientes.
+    </h2>
+    <ul class="flex items-center gap-6 overflow-auto py-6">
+      {
+        clients.map((client) => (
+          <li class="text-center text-[5vw]">
+            <a href={client.url}>{client.name}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </BorderContent>
+  <BorderContent>
+    <div class="flex flex-col text-stone-800">
       <h2
-        class="text-center font-bold text-[15vw] -tracking-wider leading-[1.5ch]"
+        class="text-center font-bold text-[10vw] -tracking-wider leading-[1.5ch]"
       >
-        Clientes.
+        Nossa atuação.
       </h2>
-      <ul class="flex items-center gap-6 overflow-auto py-6">
+      <div class="text-center">
         {
-          clients.map((client) => (
-            <li class="text-center text-6xl">
-              <a href={client.url}>{client.name}</a>
-            </li>
+          summarys.map((summary) => (
+            <details class="text-4xl">
+              <summary class="cursor-pointer">{summary.title}</summary>
+              <p class="text-2xl">{summary.text}</p>
+            </details>
           ))
         }
-      </ul>
+      </div>
     </div>
-  </main>
+  </BorderContent>
+
+  <BorderContent>
+    <div class="flex flex-col gap-6">
+      <h2
+        class="text-center font-bold text-[10vw] -tracking-wider leading-[1.5ch]"
+      >
+        Entre em contato
+      </h2>
+      <div class="text-3xl text-center flex justify-center">
+        <a
+          href="mailto:fugazconsultoria@gmail.com?subject=Estou interessado em saber mais sobre a Fugaz &body=Olá, Fugaz"
+        >
+          <MenuIcon name="ant-design:mail-filled" text="Envie-nos um Email." />
+        </a>
+      </div>
+    </div>
+  </BorderContent>
 </Layout>
