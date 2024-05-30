@@ -1,34 +1,37 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
-import Picture1 from "../assets/picture2.webp";
-import GastronomiaElegante from "../assets/gastronomia-elegante.svg";
 import HeaderImages from "../components/HeaderImages.astro";
+import { clients } from "../data/clients";
 ---
 
 <Layout title="Fugaz & Co.">
-  <main class="bg-stone-100">
-    <div class="relative z-2 p-6
-    
-    text-orange-600">
-      <h2
+  <main class="p-6 flex flex-col gap-12">
+    <div class="text-orange-600">
+      <h1
         class="text-center font-bold text-[35vw] md:text-[22vw] -tracking-widest leading-[1.5ch]"
       >
         Fugaz & Co.
-      </h2>
+      </h1>
       <div class="text-right text-[2vw]">
         <span>Consultoria gastronomica personalizada.</span>
       </div>
     </div>
     <HeaderImages />
-
-    <!-- <Image
-      src={GastronomiaElegante}
-      alt="Gastronomia Elegante"
-      class="w-[15vw] absolute top-1/2 right-8 -z-3"
-    /> -->
-    <!-- <div class="bg-orange-500 p-3">
-      <Image src={Picture1} alt="Fugaz & Co." class="w-full object-cover" />
-    </div> -->
+    <div>
+      <h2
+        class="text-center font-bold text-[15vw] -tracking-wider leading-[1.5ch]"
+      >
+        Clientes.
+      </h2>
+      <ul class="flex items-center gap-6 overflow-auto py-6">
+        {
+          clients.map((client) => (
+            <li class="text-center text-6xl">
+              <a href={client.url}>{client.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </main>
 </Layout>

@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import MenuIcon from "./MenuIcon.astro";
 import TitleSubtitle from "./TitleSubtitle.astro";
+import { clients } from "../data/clients";
 
 const menuLinks = [
   {
@@ -26,22 +27,9 @@ const menuIcons = [
     url: "https://open.spotify.com/playlist/1P7FrAMfo0ILvsbWvUbJVg?si=0cc66fad560b4e8d",
   },
 ];
-
-const clients = [
-  {
-    name: "Kairū",
-    route: "/kairu",
-    url: "https://www.instagram.com/kairurest/",
-  },
-  {
-    name: "Balthazar",
-    route: "/balthazar",
-    url: "https://www.instagram.com/balthazarvix/",
-  },
-];
 ---
 
-<div class="h-[100vh] grid md:grid-cols-2 p-12 text-5xl">
+<div class="h-[100vh] grid md:grid-cols-2 gap-12 p-12 text-5xl">
   <div class="">
     <ul class="flex flex-col gap-6">
       {

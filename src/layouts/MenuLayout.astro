@@ -1,0 +1,25 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import MenuIcon from "../components/MenuIcon.astro";
+import Navbar from "../components/Navbar.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Fugaz & Co - Menu</title>
+    <ViewTransitions />
+  </head>
+  <body>
+    <Navbar>
+      <div slot="menu">
+        <a href="/">
+          <MenuIcon name="ant-design:close-outlined" text="Close" />
+        </a>
+      </div>
+    </Navbar>
+    <slot />
+  </body>
+</html>
