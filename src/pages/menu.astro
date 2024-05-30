@@ -1,0 +1,16 @@
+---
+import MenuComponent from "../components/MenuComponent.astro";
+import Navbar from "../components/Navbar.astro";
+import MenuIcon from "../components/MenuIcon.astro";
+---
+
+<div class="bg-stone-100">
+  <Navbar>
+    <div slot="menu">
+      <a href="/">
+        <MenuIcon name="ant-design:close-outlined" text="Close" />
+      </a>
+    </div>
+  </Navbar>
+  <MenuComponent />
+</div>

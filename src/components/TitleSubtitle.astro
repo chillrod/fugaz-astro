@@ -1,0 +1,16 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  isDark?: boolean;
+}
+
+const { title, subtitle, isDark } = Astro.props;
+---
+
+<div
+  class={`${!isDark ? "text-stone-200" : "text-stone-800"} tracking-tighter leading-tight`}
+>
+  <h3 class="font-bold text-6xl">{title}</h3>
+  <span class="text-2xl">{subtitle}</span>
+</div>

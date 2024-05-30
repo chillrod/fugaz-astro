@@ -1,0 +1,60 @@
+---
+import Picture1 from "../assets/picture1.webp";
+import Picture2 from "../assets/picture2.webp";
+import Picture3 from "../assets/picture3.webp";
+import Picture4 from "../assets/picture4.webp";
+import HeaderImage from "./HeaderImage.astro";
+import TitleSubtitle from "./TitleSubtitle.astro";
+
+const headerContents = [
+  {
+    divClasses: "col-span-2 row-span-2",
+    title: "Brizz",
+    subtitle: "Music & Bar.",
+    src: Picture1,
+  },
+  {
+    divClasses: "",
+    title: "Brizz",
+    subtitle: "Music & Bar.",
+    src: Picture2,
+  },
+  {
+    divClasses: "row-span-2",
+    title: "Kairū",
+    subtitle: "Gastronomia Afetiva.",
+    src: Picture2,
+  },
+  {
+    divClasses: "",
+    title: "Pub 426",
+    subtitle: "Music & Bar.",
+    src: Picture4,
+  },
+  {
+    divClasses: "",
+    title: "Focaccia",
+    subtitle: "Gastronomia Afetiva.",
+    src: Picture3,
+  },
+];
+---
+
+<div class="grid grid-cols-3 grid-rows-3 h-[100vh] w-[90vw] m-auto gap-2">
+  {
+    headerContents.map((content) => {
+      return (
+        <div class={content.divClasses}>
+          <HeaderImage src={content.src}>
+            <div slot="title-subtitle">
+              <TitleSubtitle
+                title={content.title}
+                subtitle={content.subtitle}
+              />
+            </div>
+          </HeaderImage>
+        </div>
+      );
+    })
+  }
+</div>

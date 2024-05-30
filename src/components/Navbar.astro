@@ -1,0 +1,18 @@
+---
+import MenuIcon from "./MenuIcon.astro";
+
+const { page } = Astro.props;
+---
+
+<nav class="h-12 bg-stone-100 flex justify-between items-center relative">
+  <ul class="flex items-center gap-6">
+    <li class="flex items-center gap-4 text-stone-800">
+      <slot name="menu">
+        <a href="/menu">
+          <MenuIcon name="ant-design:menu-outlined" text="Menu" />
+        </a>
+      </slot>
+    </li>
+  </ul>
+  {page}
+</nav>

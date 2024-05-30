@@ -1,0 +1,98 @@
+---
+import { Icon } from "astro-icon/components";
+import MenuIcon from "./MenuIcon.astro";
+import TitleSubtitle from "./TitleSubtitle.astro";
+
+const menuLinks = [
+  {
+    name: "Novidades",
+    url: "#",
+  },
+  {
+    name: "Casos de Estudo",
+    url: "#",
+  },
+];
+
+const menuIcons = [
+  {
+    name: "ant-design:instagram",
+    text: "Instagram",
+    url: "https://www.instagram.com/fugazco/",
+  },
+  {
+    name: "ant-design:spotify-filled",
+    text: "Spotify",
+    url: "https://open.spotify.com/playlist/1P7FrAMfo0ILvsbWvUbJVg?si=0cc66fad560b4e8d",
+  },
+];
+
+const clients = [
+  {
+    name: "Kairū",
+    route: "/kairu",
+    url: "https://www.instagram.com/kairurest/",
+  },
+  {
+    name: "Balthazar",
+    route: "/balthazar",
+    url: "https://www.instagram.com/balthazarvix/",
+  },
+];
+---
+
+<div class="h-[100vh] grid md:grid-cols-2 p-12 text-5xl">
+  <div class="">
+    <ul class="flex flex-col gap-6">
+      {
+        menuLinks.map((link) => (
+          <li>
+            <a class="font-bold hover:underline decoration-4" href={link.url}>
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+      {
+        menuIcons.map((icon) => (
+          <li>
+            <a href={icon.url} target="_blank">
+              <MenuIcon big name={icon.name} text={icon.text} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="flex flex-col gap-6">
+    <h2>Nossos clientes</h2>
+
+    <ul class="flex flex-col gap-6 text-2xl">
+      {
+        clients.map((client) => (
+          <li class="border-stone-800 border-b-2">
+            <a
+              class="font-bold hover:underline decoration-4"
+              href={client.route}
+            >
+              {client.name}
+            </a>
+            <a
+              href={client.url}
+              target="_blank"
+              class="text-base flex items-center gap-2"
+            >
+              <Icon name="ant-design:instagram" />
+              Instagram
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <TitleSubtitle
+    isDark
+    title="Fugaz & Co."
+    subtitle="Consultoria Gastronomica"
+  />
+</div>

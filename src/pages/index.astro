@@ -1,0 +1,34 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import Picture1 from "../assets/picture2.webp";
+import GastronomiaElegante from "../assets/gastronomia-elegante.svg";
+import HeaderImages from "../components/HeaderImages.astro";
+---
+
+<Layout title="Fugaz & Co.">
+  <main class="bg-stone-100">
+    <div class="relative z-2 p-6
+    
+    text-orange-600">
+      <h2
+        class="text-center font-bold text-[35vw] md:text-[22vw] -tracking-widest leading-[1.5ch]"
+      >
+        Fugaz & Co.
+      </h2>
+      <div class="text-right text-[2vw]">
+        <span>Consultoria gastronomica personalizada.</span>
+      </div>
+    </div>
+    <HeaderImages />
+
+    <!-- <Image
+      src={GastronomiaElegante}
+      alt="Gastronomia Elegante"
+      class="w-[15vw] absolute top-1/2 right-8 -z-3"
+    /> -->
+    <!-- <div class="bg-orange-500 p-3">
+      <Image src={Picture1} alt="Fugaz & Co." class="w-full object-cover" />
+    </div> -->
+  </main>
+</Layout>
