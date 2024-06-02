@@ -11,6 +11,7 @@ import Picture1 from "../assets/picture6.jpeg";
 import Picture2 from "../assets/picture7.jpeg";
 import Picture3 from "../assets/picture10.jpeg";
 import PageSectionTitle from "../components/PageSectionTitle.astro";
+import MailContact from "../components/MailContact.astro";
 ---
 
 <Layout title="Fugaz & Co.">
@@ -106,22 +107,7 @@ import PageSectionTitle from "../components/PageSectionTitle.astro";
         <BorderContent>
           <div class="flex flex-col gap-6">
             <PageSectionTitle text="Entre em contato" />
-            <div class="text-3xl text-center flex justify-center gap-6">
-              <a
-                href="mailto:fugazconsultoria@gmail.com?subject=Estou interessado em saber mais sobre a Fugaz &body=Olá, Fugaz"
-              >
-                <MenuIcon
-                  name="ant-design:mail-filled"
-                  text="Envie-nos um Email."
-                />
-              </a>
-              <a
-                href="https://www.instagram.com/fugaz.consultoria/"
-                target="_blank"
-              >
-                <MenuIcon name="ant-design:instagram" text="Instagram" />
-              </a>
-            </div>
+            <MailContact />
           </div>
         </BorderContent>
       </section>
