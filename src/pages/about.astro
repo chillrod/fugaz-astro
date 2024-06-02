@@ -87,7 +87,7 @@ import PageSectionTitle from "../components/PageSectionTitle.astro";
     </BorderContent>
 
     <BorderContent>
-      <div class="grid md:grid-cols-3 gap-12 mt-12">
+      <div class="flex flex-wrap md:grid md:grid-cols-3 gap-12 mt-12">
         <div class="col-span-3 text-center">
           <PageSectionTitle
             text="Nossas habilidades"
@@ -122,7 +122,7 @@ import PageSectionTitle from "../components/PageSectionTitle.astro";
             description="Marketing, Vendas, Atendimento, Suporte, Pós-venda, Logística, Produção, Qualidade"
           />
         </div>
-        <div class="col-span-2 h-[80%]">
+        <div class="hidden md:block col-span-2 h-[80%] w-full">
           <Image
             src={Picture1}
             alt="Fugaz"
@@ -133,14 +133,16 @@ import PageSectionTitle from "../components/PageSectionTitle.astro";
     </BorderContent>
 
     <BorderContent>
-      <div class="grid grid-cols-2 gap-6">
-        <PageSectionTitle
-          left
-          text="Nossa equipe"
-          description="Conheça as pessoas que fazem parte da Fugaz & Co. e que tornam tudo isso possível, com muito amor e dedicação. Acreditamos que a diversidade é fundamental para o sucesso de qualquer empresa e que é através da união de diferentes talentos e habilidades que conseguimos alcançar nossos objetivos. Venha fazer parte da nossa equipe e se apaixonar por nossos produtos!"
-        />
+      <div class="flex flex-col md:grid grid-cols-2 gap-6">
+        <div>
+          <PageSectionTitle
+            left
+            text="Nossa equipe"
+            description="Conheça as pessoas que fazem parte da Fugaz & Co. e que tornam tudo isso possível, com muito amor e dedicação. Acreditamos que a diversidade é fundamental para o sucesso de qualquer empresa e que é através da união de diferentes talentos e habilidades que conseguimos alcançar nossos objetivos. Venha fazer parte da nossa equipe e se apaixonar por nossos produtos!"
+          />
+        </div>
 
-        <ul class="w-full flex gap-6 overflow-auto p-6">
+        <ul class="w-full flex gap-6 overflow-auto">
           <TeamCard
             name="João Silva"
             src={Picture2}

@@ -14,24 +14,26 @@ const headerImages = clients.map((client, index) => {
 });
 ---
 
-<div class="flex flex-col gap-6 font-serif p-4">
-  <h3 class="text-4xl font-bold">Saiba mais</h3>
-  <ul class="flex gap-12 overflow-auto py-6">
-    {
-      headerImages.map((headerImage) => (
-        <li class="min-w-[50vw] lg:min-w-[40vw] h-[50vh]">
-          <a href={headerImage.alt}>
-            <HeaderImage src={headerImage.src} alt={headerImage.alt}>
-              <div slot="title-subtitle">
-                <TitleSubtitle
-                  title="Nome do cliente"
-                  subtitle="Descrição do cliente"
-                />
-              </div>
-            </HeaderImage>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-</div>
+<BorderContent>
+  <div class="flex flex-col gap-6 font-serif p-4 bg-green-700">
+    <h3 class="text-4xl font-bold mt-6 text-stone-200">Saiba mais</h3>
+    <ul class="flex gap-12 overflow-auto py-6">
+      {
+        headerImages.map((headerImage) => (
+          <li class="min-w-[50vw] lg:min-w-[50vw] h-[30vh]">
+            <a href={headerImage.alt}>
+              <HeaderImage src={headerImage.src} alt={headerImage.alt}>
+                <div slot="title-subtitle">
+                  <TitleSubtitle
+                    title="Nome do cliente"
+                    subtitle="Descrição do cliente"
+                  />
+                </div>
+              </HeaderImage>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BorderContent>
