@@ -1,0 +1,23 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  isStacked?: boolean;
+}
+
+const { title, description, isStacked } = Astro.props;
+
+const stackedDescription = description?.split(",");
+---
+
+<h2 class="text-4xl font-medium mb-4">{title}</h2>
+{
+  isStacked && (
+    <div class="col-span-2 flex flex-col gap-2">
+      {stackedDescription?.map((desc) => (
+        <p class="text-xl">{desc}</p>
+      ))}
+    </div>
+  )
+}
+{!isStacked && <p class="text-xl col-span-2">{description}</p>}

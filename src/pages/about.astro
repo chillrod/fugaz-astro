@@ -1,12 +1,167 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import BorderContent from "../components/BorderContent.astro";
+import AboutContent from "../components/AboutContent.astro";
+import TitleSubtitle from "../components/TitleSubtitle.astro";
 import MenuLayout from "../layouts/MenuLayout.astro";
+
+import Picture1 from "../assets/picture10.jpeg";
+import Picture2 from "../assets/picture7.jpeg";
+import { Image } from "astro:assets";
+import TeamCard from "../components/TeamCard.astro";
+import MailContact from "../components/MailContact.astro";
+import PageSectionTitle from "../components/PageSectionTitle.astro";
 ---
 
 <MenuLayout title="Sobre nós">
-  <div class="font-serif text-stone-800">
-    <h1 class="text-center md:text-[18vw] -tracking-widest leading-[1.5ch]">
-      Fugaz & Co.
-    </h1>
+  <div class="md:max-w-[80vw] m-auto font-serif">
+    <BorderContent>
+      <div class="font-serif font-bold text-stone-800 grid grid-cols-2 gap-6">
+        <div class="col-span-2 self-center text-center grid gap-6">
+          <PageSectionTitle
+            text="Sobre nós"
+            description="A Fugaz & Co. é uma empresa que nasceu da paixão por criar e inovar. Acreditamos que a arte é uma forma de expressão e que ela pode ser usada para transformar o mundo. Por isso, nos dedicamos a criar produtos que inspirem e tragam alegria para a vida das pessoas."
+          />
+        </div>
+
+        <ul
+          class="col-span-2 h-[50vh] flex w-full items-center overflow-auto gap-6"
+        >
+          <li class="h-full w-[50%]">
+            <Image
+              src={Picture1}
+              alt="Fugaz"
+              class="w-full h-full object-cover"
+            />
+          </li>
+          <li class="h-full w-full">
+            <Image
+              src={Picture2}
+              alt="Fugaz"
+              class="w-full h-full object-cover"
+            />
+          </li>
+          <li class="h-full w-[50%]">
+            <Image
+              src={Picture1}
+              alt="Fugaz"
+              class="w-full h-full object-cover"
+            />
+          </li>
+        </ul>
+      </div>
+    </BorderContent>
+    <BorderContent>
+      <div class="col-span-2 self-center text-center pb-12">
+        <PageSectionTitle
+          text="A Fugaz & Co."
+          description="Somos uma empresa que nasceu da paixão por criar e inovar. Acreditamos que a arte é uma forma de expressão e que ela pode ser usada para transformar o mundo. Por isso, nos dedicamos a criar produtos que inspirem e tragam alegria para a vida das pessoas."
+        />
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 mt-12">
+        <AboutContent
+          title="O que fazemos"
+          description=`A Fugaz & Co. é uma empresa que nasceu da paixão por criar e inovar.
+        Acreditamos que a arte é uma forma de expressão e que ela pode ser
+        usada para transformar o mundo. Por isso, nos dedicamos a criar
+        produtos que inspirem e tragam alegria para a vida das pessoas.`
+        />
+
+        <AboutContent
+          title="Estratégia"
+          description=`Nossa estratégia é criar produtos que sejam únicos e especiais. Acreditamos`
+        />
+        <AboutContent
+          title="Execução"
+          description=`Nossa execução é feita com amor e cuidado. Cada peça é feita à mão e.`
+        />
+        <AboutContent
+          title="Operações"
+          description=`Nossas operações são feitas de forma sustentável e responsável.`
+        />
+        <AboutContent
+          title="Crescimento"
+          description=`Nosso crescimento é baseado na qualidade dos nossos produtos e no MAC DEMARCO`
+        />
+      </div>
+    </BorderContent>
+
+    <BorderContent>
+      <div class="grid md:grid-cols-3 gap-12 mt-12">
+        <div class="col-span-3 text-center">
+          <PageSectionTitle
+            text="Nossas habilidades"
+            description="Conheça as habilidades que nos tornam únicos e que nos permitem criar produtos incríveis para você. Acreditamos que a diversidade é fundamental para o sucesso de qualquer empresa e que é através da união de diferentes talentos!"
+          />
+        </div>
+        <div>
+          <AboutContent
+            title="Estratégia"
+            isStacked
+            description="Identidade Visual, Atendimento, Suporte, Pós-venda, Logística, Produção, Qualidade"
+          />
+        </div>
+        <div>
+          <AboutContent
+            title="Execução"
+            isStacked
+            description="Design, Desenvolvimento, Produção, Marketing, Vendas, Atendimento, Suporte"
+          />
+        </div>
+        <div>
+          <AboutContent
+            title="Operações"
+            isStacked
+            description="Logística, Produção, Qualidade, Atendimento, Suporte, Pós-venda"
+          />
+        </div>
+        <div>
+          <AboutContent
+            title="Crescimento"
+            isStacked
+            description="Marketing, Vendas, Atendimento, Suporte, Pós-venda, Logística, Produção, Qualidade"
+          />
+        </div>
+        <div class="col-span-2 h-[80%]">
+          <Image
+            src={Picture1}
+            alt="Fugaz"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </BorderContent>
+
+    <BorderContent>
+      <div class="grid grid-cols-2 gap-6">
+        <PageSectionTitle
+          left
+          text="Nossa equipe"
+          description="Conheça as pessoas que fazem parte da Fugaz & Co. e que tornam tudo isso possível, com muito amor e dedicação. Acreditamos que a diversidade é fundamental para o sucesso de qualquer empresa e que é através da união de diferentes talentos e habilidades que conseguimos alcançar nossos objetivos. Venha fazer parte da nossa equipe e se apaixonar por nossos produtos!"
+        />
+
+        <ul class="w-full flex gap-6 overflow-auto p-6">
+          <TeamCard
+            name="João Silva"
+            src={Picture2}
+            role="CEO"
+            desc="João é o fundador da Fugaz & Co. e é apaixonado por criar produtos que inspirem e tragam alegria para a vida das pessoas. Ele acredita que a arte é uma forma de expressão e que ela pode ser usada para transformar o mundo."
+          />
+          <TeamCard
+            name="João Silva"
+            src={Picture1}
+            role="CEO"
+            desc="João é o fundador da Fugaz & Co. e é apaixonado por criar produtos que inspirem e tragam alegria para a vida das pessoas. Ele acredita que a arte é uma forma de expressão e que ela pode ser usada para transformar o mundo."
+          />
+        </ul>
+      </div>
+    </BorderContent>
+
+    <BorderContent>
+      <div class="grid place-items-center">
+        <TitleSubtitle isDark title="Fugaz & Co." />
+        <MailContact />
+      </div>
+    </BorderContent>
   </div>
 </MenuLayout>
