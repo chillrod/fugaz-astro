@@ -1,0 +1,11 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<h2 class="text-center text-[7vw] -tracking-wide font-semibold leading-[1.5ch]">
+  {text}.
+</h2>

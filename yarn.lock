@@ -615,6 +615,11 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.21.3.tgz#899c03576c4c28c83228f0e64dfa10edae99c9a2"
   integrity sha512-xRxC0jaJWDLYvcUvjQmHCJSfMrgmUuvsoXgDeU/wTorQ1ngDdUBuFtgY3W1Pc5sprGAvZBtWdJX7RPg/iZZUqA==
 
+"@fontsource-variable/noto-serif-khojki@^5.0.24":
+  version "5.0.24"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/noto-serif-khojki/-/noto-serif-khojki-5.0.24.tgz#2dca6fcb2b7bf13e4b8a1b1f5a20875dad486f38"
+  integrity sha512-fuXAPv+FSaJxO/UM2+6ZeV9yBMf5WbnXdHt6nVAsFiI/hNANw5TsGYTfcRfroOYY1aekYoCG0BNVopAEH3lgQg==
+
 "@iconify-json/ant-design@^1.1.16":
   version "1.1.16"
   resolved "https://registry.yarnpkg.com/@iconify-json/ant-design/-/ant-design-1.1.16.tgz#292d35de75ce3e84a1e3ae29d76997e4b5a185f0"
