@@ -42,9 +42,7 @@ import PageSectionTitle from "../components/PageSectionTitle.astro";
           {
             clients.map((client, id) => (
               <li class="text-center text-[8vw] bg-orange-600 text-stone-200">
-                <a href={client.name} target="_blank">
-                  {client.name}
-                </a>
+                <a href={client.name}>{client.name}</a>
               </li>
             ))
           }
