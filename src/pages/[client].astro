@@ -1,0 +1,177 @@
+---
+import { Image } from "astro:assets";
+import { clients } from "../data/clients";
+import ClientLayout from "../layouts/ClientLayout.astro";
+import Picture1 from "../assets/picture4.webp";
+import Picture2 from "../assets/picture9.jpeg";
+import Picture3 from "../assets/picture10.jpeg";
+import Picture4 from "../assets/picture6.jpeg";
+import Picture5 from "../assets/picture7.jpeg";
+import Picture6 from "../assets/picture8.jpeg";
+import MenuIcon from "../components/MenuIcon.astro";
+import BorderContent from "../components/BorderContent.astro";
+import TitleSubtitle from "../components/TitleSubtitle.astro";
+
+export function getStaticPaths() {
+  return clients.map((client) => {
+    return {
+      params: {
+        client: client.name,
+      },
+      props: {
+        clientProps: client,
+      },
+    };
+  });
+}
+
+const { client } = Astro.params;
+const { clientProps } = Astro.props;
+---
+
+<ClientLayout title={client}>
+  <div class="font-serif">
+    <div class="grid grid-cols-2 relative">
+      <div class="col-span-2 max-h-[60vh]">
+        <Image src={Picture5} alt={client} class="object-cover w-full h-full" />
+      </div>
+      <div class="absolute bottom-0">
+        <h2 class="text-[10vw] text-stone-800 px-6">
+          {clientProps.name}
+        </h2>
+      </div>
+    </div>
+    <section
+      class="flex flex-col gap-6 text-stone-800 p-6 lg:max-w-[85vw] m-auto"
+    >
+      <BorderContent>
+        <div
+          class="md:grid flex flex-col md:grid-cols-2 md:items-end gap-6 h-full"
+        >
+          <div class="text-2xl text-left">
+            <div class="flex items-center gap-4">
+              <MenuIcon
+                plain
+                small
+                name="ant-design:calendar-filled"
+                text="Fev/2022 - Abril/2024"
+              />
+              <MenuIcon small name="ant-design:instagram" text="Instagram" />
+            </div>
+            <p>Nosso caso de estudo para a Balthazar.</p>
+          </div>
+          <BorderContent>
+            <div class="text-lg flex flex-col gap-4">
+              <TitleSubtitle
+                isDark
+                title="Conceito"
+                subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis tenetur dolore distinctio cumque at placeat pariatur expedita ipsam voluptate suscipit accusamus eligendi assumenda nostrum eum rerum recusandae neque, quo ab."
+              />
+            </div>
+          </BorderContent>
+          <div class="col-span-1 h-full">
+            <Image
+              src={Picture4}
+              alt="Balthazar"
+              class="object-cover w-full h-full"
+            />
+          </div>
+          <div class="self-start items-start grid grid-cols-2 gap-4">
+            <div class="self-start col-span-2">
+              <TitleSubtitle
+                isDark
+                subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis tenetur dolore distinctio cumque at placeat pariatur expedita ipsam voluptate suscipit accusamus eligendi assumenda nostrum eum rerum recusandae neque, quo ab."
+              />
+            </div>
+            <div class="col-span-1 flex gap-6 h-full">
+              <Image
+                src={Picture3}
+                alt="Balthazar"
+                class="object-cover w-full h-full"
+              />
+              <Image
+                src={Picture2}
+                alt="Balthazar"
+                class="object-cover w-full h-full"
+              />
+            </div>
+          </div>
+        </div>
+      </BorderContent>
+
+      <BorderContent>
+        <div
+          class="flex flex-col items-center md:grid grid-cols-2 gap-6 h-full"
+        >
+          <TitleSubtitle
+            isDark
+            title="Apresentação"
+            subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis tenetur dolore distinctio cumque at placeat pariatur expedita ipsam voluptate suscipit accusamus eligendi assumenda nostrum eum rerum recusandae neque, quo ab. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis tenetur dolore distinctio cumque at placeat pariatur expedita ipsam voluptate suscipit accusamus eligendi assumenda nostrum eum rerum recusandae neque, quo ab. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis tenetur dolore distinctio cumque at placeat pariatur expedita ipsam voluptate."
+          />
+
+          <div class="h-[500px]">
+            <Image
+              src={Picture6}
+              alt="Balthazar"
+              class="object-cover w-full h-full"
+            />
+          </div>
+          <div class="order-2">
+            <TitleSubtitle
+              isDark
+              subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis tenetur dolore distinctio cumque at placeat pariatur expedita ipsam voluptate suscipit accusamus eligendi assumenda nostrum eum rerum recusandae neque, quo ab. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis tenetur dolore distinctio cumque at placeat pariatur expedita ipsam voluptate suscipit accusamus eligendi assumenda nostrum eum rerum recusandae neque, quo ab. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis tenetur dolore distinctio cumque at placeat pariatur expedita ipsam voluptate."
+            />
+          </div>
+
+          <div class="h-[500px] w-full">
+            <Image
+              src={Picture1}
+              alt="Balthazar"
+              class="object-cover w-full h-full"
+            />
+          </div>
+        </div>
+      </BorderContent>
+      <TitleSubtitle isDark title="Resultado" />
+      <ul class="grid">
+        <li class="max-h-[60vh]">
+          <Image
+            src={Picture3}
+            alt={client}
+            class="object-cover w-full h-full"
+          />
+        </li>
+        <li class="max-h-[60vh]">
+          <Image
+            src={Picture2}
+            alt={client}
+            class="object-cover w-full h-full"
+          />
+        </li>
+      </ul>
+      <ul class="flex">
+        <li>
+          <Image
+            src={Picture4}
+            alt={client}
+            class="object-cover w-full h-full"
+          />
+        </li>
+        <li>
+          <Image
+            src={Picture5}
+            alt={client}
+            class="object-cover w-full h-full"
+          />
+        </li>
+        <li>
+          <Image
+            src={Picture6}
+            alt={client}
+            class="object-cover w-full h-full"
+          />
+        </li>
+      </ul>
+    </section>
+  </div>
+</ClientLayout>

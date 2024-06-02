@@ -3,19 +3,32 @@ import { Icon } from "astro-icon/components";
 
 interface Props {
   name: string;
-  text: string;
+  text?: string;
   big?: boolean;
+  small?: boolean;
   isDark?: boolean;
+  plain?: boolean;
 }
 
-const { name, text, big, isDark } = Astro.props;
+const { name, text, big, isDark, plain, small } = Astro.props;
 ---
 
 <div
-  class={`${isDark ? "text-stone-200" : "text-stone-800"} flex items-center gap-3 cursor-pointer ${big ? "text-5xl" : "text-2xl"}`}
+  class={`${isDark ? "text-stone-200" : "text-stone-800"} flex items-center gap-3  ${plain ? "" : "cursor-pointer"} ${big ? "text-5xl" : "text-2xl"} ${small ? "text-lg" : ""}`}
 >
-  <button>
-    <Icon name={name} />
-  </button>
-  <p>{text}</p>
+  {
+    plain ? (
+      <>
+        <Icon name={name} />
+        <p class="font-serif">{text}</p>
+      </>
+    ) : (
+      <>
+        <button>
+          <Icon name={name} />
+        </button>
+        <p class="font-serif">{text}</p>
+      </>
+    )
+  }
 </div>

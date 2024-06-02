@@ -6,12 +6,20 @@ import { clients } from "../data/clients";
 
 const menuLinks = [
   {
-    name: "Novidades",
-    url: "#",
+    name: "Clientes",
+    url: "/#clients",
   },
   {
-    name: "Casos de Estudo",
-    url: "#",
+    name: "Sobre nós",
+    url: "/about",
+  },
+  {
+    name: "Serviços",
+    url: "/#services",
+  },
+  {
+    name: "Contato",
+    url: "/#contact",
   },
 ];
 
@@ -29,13 +37,13 @@ const menuIcons = [
 ];
 ---
 
-<div class="h-[100vh] grid md:grid-cols-2 gap-12 p-12 text-5xl">
+<div class="h-[100vh] grid md:grid-cols-2 gap-12 p-12 text-5xl font-serif text-stone-800">
   <div class="">
     <ul class="flex flex-col gap-6">
       {
         menuLinks.map((link) => (
           <li>
-            <a class="font-bold hover:underline decoration-4" href={link.url}>
+            <a class="hover:underline decoration-dashed" href={link.url}>
               {link.name}
             </a>
           </li>
@@ -58,11 +66,8 @@ const menuIcons = [
     <ul class="flex flex-col gap-6 text-2xl">
       {
         clients.map((client) => (
-          <li class="border-stone-800 border-b-2">
-            <a
-              class="font-bold hover:underline decoration-4"
-              href={client.route}
-            >
+          <li class="border-stone-800 border-b-2 border-dashed">
+            <a class="hover:underline decoration-dashed" href={client.route}>
               {client.name}
             </a>
             <a
@@ -78,9 +83,5 @@ const menuIcons = [
       }
     </ul>
   </div>
-  <TitleSubtitle
-    isDark
-    title="Fugaz & Co."
-    subtitle="Consultoria Gastronomica"
-  />
+  <TitleSubtitle isDark title="Fugaz & Co." />
 </div>

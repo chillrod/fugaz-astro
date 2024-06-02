@@ -4,7 +4,7 @@ import MenuIcon from "./MenuIcon.astro";
 const { page } = Astro.props;
 ---
 
-<nav class="h-12 flex justify-between items-center sticky top-0 z-50">
+<nav class="h-12 flex justify-between items-center sticky top-5 z-50">
   <ul class="flex items-center gap-6">
     <li class="flex items-center gap-4 text-stone-800">
       <slot name="menu">
@@ -14,5 +14,5 @@ const { page } = Astro.props;
       </slot>
     </li>
   </ul>
-  {page}
+  {page && <h2 class="text-2xl font-serif">{page}</h2>}
 </nav>

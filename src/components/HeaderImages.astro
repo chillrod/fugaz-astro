@@ -3,37 +3,38 @@ import Picture1 from "../assets/picture1.webp";
 import Picture2 from "../assets/picture2.webp";
 import Picture3 from "../assets/picture3.webp";
 import Picture4 from "../assets/picture4.webp";
+import { clients } from "../data/clients";
 import HeaderImage from "./HeaderImage.astro";
 import TitleSubtitle from "./TitleSubtitle.astro";
 
 const headerContents = [
   {
     divClasses: "col-span-2 row-span-2",
-    title: "Brizz",
+    title: clients[0].name,
     subtitle: "Music & Bar.",
     src: Picture1,
   },
   {
     divClasses: "",
-    title: "Brizz",
+    title: clients[1].name,
     subtitle: "Music & Bar.",
     src: Picture2,
   },
   {
     divClasses: "row-span-2",
-    title: "Kairū",
+    title: clients[2].name,
     subtitle: "Gastronomia Afetiva.",
     src: Picture2,
   },
   {
     divClasses: "",
-    title: "Pub 426",
+    title: clients[3].name,
     subtitle: "Music & Bar.",
     src: Picture4,
   },
   {
     divClasses: "",
-    title: "Focaccia",
+    title: clients[4].name,
     subtitle: "Gastronomia Afetiva.",
     src: Picture3,
   },
@@ -45,14 +46,16 @@ const headerContents = [
     headerContents.map((content) => {
       return (
         <div class={content.divClasses}>
-          <HeaderImage src={content.src}>
-            <div slot="title-subtitle">
-              <TitleSubtitle
-                title={content.title}
-                subtitle={content.subtitle}
-              />
-            </div>
-          </HeaderImage>
+          <a href={content.title}>
+            <HeaderImage src={content.src}>
+              <div slot="title-subtitle">
+                <TitleSubtitle
+                  title={content.title}
+                  subtitle={content.subtitle}
+                />
+              </div>
+            </HeaderImage>
+          </a>
         </div>
       );
     })
