@@ -15,7 +15,7 @@ export const BUILDER_URLS = {
 const baseURL = "https://cdn.builder.io/api/v3/content/";
 
 export const fetchBuilderContent = async (url: string) => {
-  const fetchURL = `${baseURL}${url}?apiKey=${BUILDER_API_PUBLIC_KEY}`;
+  const fetchURL = `${baseURL}${url}?apiKey=${BUILDER_API_PUBLIC_KEY}&cachebust=true`;
 
   const { results } = await fetch(fetchURL)
     .then((res) => res.json())
