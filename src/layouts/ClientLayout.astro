@@ -6,13 +6,23 @@ import Footer from "../components/Footer.astro";
 import KnowMoreClients from "../components/KnowMoreClients.astro";
 import BorderContent from "../components/BorderContent.astro";
 import MailContact from "../components/MailContact.astro";
+import type { ClientModel } from "../interfaces/ClientModel";
+import { BUILDER_URLS, fetchBuilderContent } from "../services/builder-io";
 
 interface Props {
   title: string;
+  slug: string;
 }
 
-const { title } = Astro.props;
-const { client } = Astro.params;
+const { title, slug } = Astro.props;
+
+const clientsAPIResult: ClientModel[] = await fetchBuilderContent(
+  BUILDER_URLS.clients
+);
+
+const filteredClients = clientsAPIResult.filter(
+  (client) => client.data.slug !== slug
+);
 ---
 
 <!doctype html>
@@ -27,7 +37,7 @@ const { client } = Astro.params;
     <ViewTransitions />
   </head>
   <body>
-    <Navbar page={client}>
+    <Navbar page={title}>
       <div slot="menu">
         <a href="/#clients">
           <MenuIcon big name="ant-design:close-circle-filled" />
@@ -40,7 +50,7 @@ const { client } = Astro.params;
     <BorderContent>
       <MailContact />
     </BorderContent>
-    <KnowMoreClients />
+    <KnowMoreClients clients={filteredClients} />
     <style is:global>
       :root {
         background-color: theme("colors.stone.100");

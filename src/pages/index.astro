@@ -2,57 +2,74 @@
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import HeaderImages from "../components/HeaderImages.astro";
-import MenuIcon from "../components/MenuIcon.astro";
 import BorderContent from "../components/BorderContent.astro";
-import { clients } from "../data/clients";
-import { summarys } from "../data/summarys";
 
-import Picture1 from "../assets/picture6.jpeg";
-import Picture2 from "../assets/picture7.jpeg";
-import Picture3 from "../assets/picture10.jpeg";
 import PageSectionTitle from "../components/PageSectionTitle.astro";
 import MailContact from "../components/MailContact.astro";
+import { fetchBuilderContent, BUILDER_URLS } from "../services/builder-io";
+import type { ClientModel } from "../interfaces/ClientModel";
+import type { HomeModel } from "../interfaces/HomeModel";
+import type { ServicesModel } from "../interfaces/ServicesModel";
+
+const clientsAPIResult: ClientModel[] = await fetchBuilderContent(
+  BUILDER_URLS.clients
+);
+
+const homeApiResult: HomeModel[] = await fetchBuilderContent(
+  BUILDER_URLS.home.header
+);
+const servicesApiResult: ServicesModel[] = await fetchBuilderContent(
+  BUILDER_URLS.services
+);
 ---
 
-<Layout title="Fugaz & Co.">
+<Layout title={homeApiResult[0].data.title}>
   <div class="text-stone-800 font-serif">
     <main class="flex flex-col gap-12">
       <div class="text-stone-800">
         <h1
           class="text-center text-[35vw] md:text-[21vw] -tracking-widest leading-[1.8ch]"
         >
-          Fugaz & Co.
+          {homeApiResult[0].data.title}
         </h1>
         <div class="text-right text-[4vw] md:text-[2.5vw]">
-          <span>Consultoria gastronomica personalizada.</span>
+          <span>
+            {homeApiResult[0].data.desc}
+          </span>
         </div>
       </div>
     </main>
 
     <section id="#headerimages">
       <BorderContent>
-        <HeaderImages />
+        <HeaderImages clients={clientsAPIResult} />
       </BorderContent>
     </section>
 
     <section id="clients">
       <BorderContent>
-        <PageSectionTitle text="Clientes" />
+        <PageSectionTitle text={homeApiResult[0].data.textoClientes} />
 
         <ul class="flex items-center gap-6 overflow-auto py-6">
           {
-            clients.map((client, id) => (
-              <li class="text-center text-[8vw] bg-orange-600 text-stone-200">
-                <a href={client.name}>{client.name}</a>
-              </li>
-            ))
+            clientsAPIResult.map((client) => {
+              const { data } = client;
+
+              return (
+                <li class="text-center text-[8vw] bg-orange-600 text-stone-200">
+                  <a href={data.slug}>{data.nome}</a>
+                </li>
+              );
+            })
           }
         </ul>
         <div class="h-[40vh]">
           <Image
-            src={Picture1}
-            alt="Consultoria"
+            src={homeApiResult[0].data.fotoAbaixoClientes.src}
+            alt={homeApiResult[0].data.fotoAbaixoClientes.alt}
             class="w-full h-full object-cover"
+            width="800"
+            height="800"
           />
         </div>
       </BorderContent>
@@ -62,41 +79,48 @@ import MailContact from "../components/MailContact.astro";
           <div class="grid grid-rows-1 gap-12">
             <div class="order-2 flex flex-col gap-12">
               <div class="flex gap-6 flex-col justify-center text-center">
-                <PageSectionTitle text="Nossa atuação" />
+                <PageSectionTitle text={homeApiResult[0].data.textoServicos} />
                 {
-                  summarys.map((summary) => (
-                    <div class="flex items-center gap-2 justify-center">
-                      <details class="text-4xl ">
-                        <summary class="cursor-pointer">
-                          {summary.title}
-                        </summary>
-                        <p class="text-2xl">{summary.text}</p>
-                      </details>
-                    </div>
-                  ))
+                  servicesApiResult[0].data.servicos.map((summary) => {
+                    return (
+                      <div class="flex items-center gap-2 justify-center">
+                        <details class="text-4xl ">
+                          <summary class="cursor-pointer">
+                            {summary.titulo}
+                          </summary>
+                          <p class="text-2xl">{summary.descricao}</p>
+                        </details>
+                      </div>
+                    );
+                  })
                 }
               </div>
             </div>
 
             <div class="grid grid-cols-2 gap-6">
-              <div class="cols-span-1 h-[50vh]">
+              <div class="cols-span-1 h-[50vh] w-full">
                 <Image
-                  src={Picture3}
-                  alt="Consultoria"
+                  src={homeApiResult[0].data.fotoAbaixoClientes.src}
+                  alt={homeApiResult[0].data.fotoAbaixoClientes.alt}
                   class="w-full h-full object-cover"
+                  width="800"
+                  height="800"
                 />
               </div>
               <div class="grid cols-span-2 grid-rows-2 gap-6 h-[50vh]">
-                <Image
-                  src={Picture2}
-                  alt="Consultoria"
-                  class="w-full h-full object-cover"
-                />
-                <Image
-                  src={Picture1}
-                  alt="Consultoria"
-                  class="w-full h-full object-cover"
-                />
+                {
+                  homeApiResult[0].data.fotoAcimaservicos.Default.map(
+                    (foto) => (
+                      <Image
+                        src={foto.imagens.src}
+                        alt={foto.imagens.alt}
+                        class="w-full h-full object-cover"
+                        width="800"
+                        height="800"
+                      />
+                    )
+                  )
+                }
               </div>
             </div>
           </div>
@@ -106,17 +130,11 @@ import MailContact from "../components/MailContact.astro";
       <section id="contact">
         <BorderContent>
           <div class="flex flex-col gap-6">
-            <PageSectionTitle text="Entre em contato" />
+            <PageSectionTitle text={homeApiResult[0].data.textoContato} />
             <MailContact />
           </div>
         </BorderContent>
       </section>
     </section>
-
-    <style>
-      details > summary {
-        /* list-style: none; */
-      }
-    </style>
   </div>
 </Layout>

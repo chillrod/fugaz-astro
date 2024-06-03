@@ -1,14 +1,24 @@
 ---
+import { BUILDER_URLS, fetchBuilderContent } from "../services/builder-io";
 import MenuIcon from "./MenuIcon.astro";
+
+const commonTextsResult = await fetchBuilderContent(BUILDER_URLS.common);
+
+const infoTextsResult = await fetchBuilderContent(BUILDER_URLS.info);
 ---
 
-<div class="text-3xl text-center flex flex-col md:flex-row place-items-center justify-center gap-6">
+<div
+  class="text-3xl text-center flex flex-col md:flex-row place-items-center justify-center gap-6"
+>
   <a
-    href="mailto:fugazconsultoria@gmail.com?subject=Estou interessado em saber mais sobre a Fugaz &body=Olá, Fugaz"
+    href=`mailto:${infoTextsResult[0].data.email}?subject=${commonTextsResult[0].data.assuntoDoEmail}&body=${commonTextsResult[0].data.textoDoEmail}`
   >
-    <MenuIcon name="ant-design:mail-filled" text="Envie-nos um Email." />
+    <MenuIcon
+      name="ant-design:mail-filled"
+      text={commonTextsResult[0].data.envieNosEmail}
+    />
   </a>
-  <a href="https://www.instagram.com/fugaz.consultoria/" target="_blank">
+  <a href={infoTextsResult[0].data.instagram} target="_blank">
     <MenuIcon name="ant-design:instagram" text="Instagram" />
   </a>
 </div>

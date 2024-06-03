@@ -1,0 +1,197 @@
+---
+import { Image } from "astro:assets";
+import ClientLayout from "../layouts/ClientLayout.astro";
+import MenuIcon from "../components/MenuIcon.astro";
+import BorderContent from "../components/BorderContent.astro";
+import TitleSubtitle from "../components/TitleSubtitle.astro";
+import { BUILDER_URLS, fetchBuilderContent } from "../services/builder-io";
+import type { ClientModel } from "../interfaces/ClientModel";
+
+export async function getStaticPaths() {
+  const clientsAPIResult: ClientModel[] = await fetchBuilderContent(
+    BUILDER_URLS.clients
+  );
+
+  return clientsAPIResult.map((client) => {
+    return {
+      params: {
+        slug: client.data.slug,
+      },
+      props: {
+        clientProps: client.data,
+      },
+    };
+  });
+}
+
+const { clientProps } = Astro.props;
+---
+
+<ClientLayout title={clientProps.nome} slug={clientProps.slug}>
+  <div class="font-serif">
+    <div class="grid grid-cols-2 relative">
+      <div class="col-span-2 max-h-[60vh]">
+        <Image
+          src={clientProps.detalhamentoImagemPrincipal.src}
+          alt={clientProps.detalhamentoImagemPrincipal.alt}
+          class="object-cover w-full h-full"
+          width="600"
+          height="600"
+        />
+      </div>
+      <div class="absolute bottom-0">
+        <h2 class="text-[10vw] text-stone-800 px-6">
+          {clientProps.nome}
+        </h2>
+      </div>
+    </div>
+    <section
+      class="flex flex-col gap-6 text-stone-800 p-6 lg:max-w-[85vw] m-auto"
+    >
+      <BorderContent>
+        <div
+          class="md:grid flex flex-col md:grid-cols-2 md:items-end gap-6 h-full"
+        >
+          <div class="text-2xl text-left">
+            <div class="flex items-center gap-4">
+              <MenuIcon
+                plain
+                small
+                name="ant-design:calendar-filled"
+                text={new Date(clientProps.dataDoProjeto).toLocaleString(
+                  "pt-BR",
+                  {
+                    year: "numeric",
+                    month: "long",
+                  }
+                )}
+              />
+              <a href={clientProps.instagram} target="_blank">
+                <MenuIcon small name="ant-design:instagram" text="Instagram" />
+              </a>
+            </div>
+            <p>Nosso caso de estudo para {clientProps.nome}.</p>
+          </div>
+          <BorderContent>
+            <div class="text-lg flex flex-col gap-4">
+              <TitleSubtitle
+                isDark
+                title={clientProps.detalhamentoSecao1.tituloSecao1}
+                subtitle={clientProps.detalhamentoSecao1.secao1Texto1}
+              />
+            </div>
+          </BorderContent>
+          <div class="col-span-1 h-full">
+            <Image
+              src={clientProps.detalhamentoSecao1.imagem1.src}
+              alt={clientProps.detalhamentoSecao1.imagem1.alt}
+              class="object-cover w-full h-full"
+              width="600"
+              height="600"
+            />
+          </div>
+          <div class="items-start grid grid-cols-2 gap-4">
+            <div class="self-start col-span-2">
+              <TitleSubtitle
+                isDark
+                subtitle={clientProps.detalhamentoSecao1.secao1Texto2}
+              />
+            </div>
+            <div class="col-span-1 self-end flex gap-6 h-full">
+              <Image
+                src={clientProps.detalhamentoSecao1.imagem2.src}
+                alt={clientProps.detalhamentoSecao1.imagem2.alt}
+                class="object-cover w-full h-full"
+                width="600"
+                height="600"
+              />
+              <Image
+                src={clientProps.detalhamentoSecao1.imagem3.src}
+                alt={clientProps.detalhamentoSecao1.imagem3.alt}
+                class="object-cover w-full h-full"
+                width="600"
+                height="600"
+              />
+            </div>
+          </div>
+        </div>
+      </BorderContent>
+
+      <BorderContent>
+        <div
+          class="flex flex-col items-center md:grid grid-cols-2 gap-6 h-full"
+        >
+          <TitleSubtitle
+            isDark
+            title={clientProps.detalhamentoSecao2.tituloDaSecao2}
+            subtitle={clientProps.detalhamentoSecao2.textoSecao2}
+          />
+
+          <div class="h-[500px]">
+            <Image
+              src={clientProps.detalhamentoSecao2.image1Secao2.src}
+              alt={clientProps.detalhamentoSecao2.image1Secao2.alt}
+              class="object-cover w-full h-full"
+              width="600"
+              height="600"
+            />
+          </div>
+          <div class="order-2">
+            <TitleSubtitle
+              isDark
+              subtitle={clientProps.detalhamentoSecao2.textoSecao2}
+            />
+          </div>
+
+          <div class="h-[500px] w-full">
+            <Image
+              src={clientProps.detalhamentoSecao2.imagem2Secao2.src}
+              alt={clientProps.detalhamentoSecao2.imagem2Secao2.alt}
+              class="object-cover w-full h-full"
+              width="600"
+              height="600"
+            />
+          </div>
+        </div>
+      </BorderContent>
+      <TitleSubtitle
+        isDark
+        title={clientProps.detalhamentoSecao3.tituloDaSecao3}
+      />
+      <ul class="grid">
+        {
+          clientProps.detalhamentoSecao3.imagensGrandes.map((content) => {
+            return (
+              <li class="max-h-[60vh]">
+                <Image
+                  src={content.imagem.src}
+                  alt={content.imagem.alt}
+                  class="object-cover w-full h-full"
+                  width="600"
+                  height="600"
+                />
+              </li>
+            );
+          })
+        }
+      </ul>
+      <ul class="flex overflow-auto">
+        {
+          clientProps.detalhamentoSecao3.imagensMenores.map((content) => {
+            return (
+              <li class="max-h-[30vh]">
+                <Image
+                  src={content.imagens.src}
+                  alt={content.imagens.alt}
+                  class="object-cover w-full h-full"
+                  width="300"
+                  height="300"
+                />
+              </li>
+            );
+          })
+        }
+      </ul>
+    </section>
+  </div>
+</ClientLayout>

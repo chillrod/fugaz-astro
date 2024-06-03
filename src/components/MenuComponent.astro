@@ -2,27 +2,36 @@
 import { Icon } from "astro-icon/components";
 import MenuIcon from "./MenuIcon.astro";
 import TitleSubtitle from "./TitleSubtitle.astro";
-import { clients } from "../data/clients";
+import { BUILDER_URLS, fetchBuilderContent } from "../services/builder-io";
+import type { ClientModel } from "../interfaces/ClientModel";
+
+
+const commonTextsResult = await fetchBuilderContent(BUILDER_URLS.common);
+const headerApiResult = await fetchBuilderContent(BUILDER_URLS.home.header);
+const infoApiResult = await fetchBuilderContent(BUILDER_URLS.info);
+const clientsApiResult: ClientModel[] = await fetchBuilderContent(
+  BUILDER_URLS.clients
+);
 
 const menuLinks = [
   {
-    name: "Home",
+    name: commonTextsResult[0].data.menuHome,
     url: "/",
   },
   {
-    name: "Clientes",
+    name: commonTextsResult[0].data.menuClientes,
     url: "/#clients",
   },
   {
-    name: "Sobre nós",
+    name: commonTextsResult[0].data.menuSobreNos,
     url: "/about",
   },
   {
-    name: "Serviços",
+    name: commonTextsResult[0].data.menuServicos,
     url: "/#services",
   },
   {
-    name: "Contato",
+    name: commonTextsResult[0].data.menuContato,
     url: "/#contact",
   },
 ];
@@ -31,17 +40,20 @@ const menuIcons = [
   {
     name: "ant-design:instagram",
     text: "Instagram",
-    url: "https://www.instagram.com/fugazco/",
+    url: infoApiResult[0].data.instagram,
   },
   {
     name: "ant-design:spotify-filled",
     text: "Spotify",
-    url: "https://open.spotify.com/playlist/1P7FrAMfo0ILvsbWvUbJVg?si=0cc66fad560b4e8d",
+    url: commonTextsResult[0].data.spotify,
   },
 ];
+
 ---
 
-<div class="h-[100vh] grid md:grid-cols-2 gap-12 p-6 text-5xl font-serif font-medium text-stone-800">
+<div
+  class="h-[100vh] grid md:grid-cols-2 gap-12 p-6 text-5xl font-serif font-medium text-stone-800"
+>
   <div class="">
     <ul class="flex flex-col gap-6">
       {
@@ -65,27 +77,30 @@ const menuIcons = [
     </ul>
   </div>
   <div class="flex flex-col gap-6">
-    <h2>Nossos clientes</h2>
+    <h2>{commonTextsResult[0].data.nossosClientes}</h2>
 
     <ul class="flex flex-col gap-6 text-2xl">
       {
-        clients.map((client) => (
-          <li class="border-stone-800 border-b-2 border-dashed">
-            <a class="hover:underline decoration-dashed" href={client.route}>
-              {client.name}
-            </a>
-            <a
-              href={client.url}
-              target="_blank"
-              class="text-base flex items-center gap-2"
-            >
-              <Icon name="ant-design:instagram" />
-              Instagram
-            </a>
-          </li>
-        ))
+        clientsApiResult.map((client) => {
+          const { data } = client;
+          return (
+            <li class="border-stone-800 border-b-2 border-dashed">
+              <a class="hover:underline decoration-dashed" href={data.slug}>
+                {data.nome}
+              </a>
+              <a
+                href={data.instagram}
+                target="_blank"
+                class="text-base flex items-center gap-2"
+              >
+                <Icon name="ant-design:instagram" />
+                Instagram
+              </a>
+            </li>
+          );
+        })
       }
     </ul>
   </div>
-  <TitleSubtitle isDark title="Fugaz & Co." />
+  <TitleSubtitle isDark title={headerApiResult[0].data.title} />
 </div>

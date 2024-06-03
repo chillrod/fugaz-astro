@@ -1,44 +1,28 @@
 ---
-import Picture1 from "../assets/picture1.webp";
-import Picture2 from "../assets/picture2.webp";
-import Picture3 from "../assets/picture3.webp";
-import Picture4 from "../assets/picture4.webp";
-import { clients } from "../data/clients";
+import type { ClientModel } from "../interfaces/ClientModel";
 import HeaderImage from "./HeaderImage.astro";
 import TitleSubtitle from "./TitleSubtitle.astro";
 
-const headerContents = [
-  {
-    divClasses: "col-span-2 row-span-2",
-    title: clients[0].name,
-    subtitle: "Music & Bar.",
-    src: Picture1,
-  },
-  {
-    divClasses: "",
-    title: clients[1].name,
-    subtitle: "Music & Bar.",
-    src: Picture2,
-  },
-  {
-    divClasses: "row-span-2",
-    title: clients[2].name,
-    subtitle: "Gastronomia Afetiva.",
-    src: Picture2,
-  },
-  {
-    divClasses: "",
-    title: clients[3].name,
-    subtitle: "Music & Bar.",
-    src: Picture4,
-  },
-  {
-    divClasses: "",
-    title: clients[4].name,
-    subtitle: "Gastronomia Afetiva.",
-    src: Picture3,
-  },
-];
+interface Props {
+  clients: ClientModel[];
+}
+const { clients } = Astro.props;
+
+const headerContents = clients.slice(0, 8).map((client, id) => {
+  const { data } = client;
+
+  const divClasses =
+    id === 0 ? "col-span-2 row-span-2" : id === 2 ? "row-span-2" : "";
+
+  return {
+    divClasses: divClasses,
+    title: data.nome,
+    slug: data.slug,
+    subtitle: data.descricao,
+    src: data.imagemPaginaPrincipal.src,
+    alt: data.imagemPaginaPrincipal.alt,
+  };
+});
 ---
 
 <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-rows-3 md:h-[100vh] gap-2">
@@ -46,8 +30,8 @@ const headerContents = [
     headerContents.map((content) => {
       return (
         <div class={content.divClasses}>
-          <a href={content.title}>
-            <HeaderImage src={content.src}>
+          <a href={content.slug}>
+            <HeaderImage src={content.src} alt={content.alt}>
               <div slot="title-subtitle">
                 <TitleSubtitle
                   title={content.title}

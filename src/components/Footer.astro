@@ -1,12 +1,14 @@
 ---
-import MenuIcon from "./MenuIcon.astro";
+import { BUILDER_URLS, fetchBuilderContent } from "../services/builder-io";
 import TitleSubtitle from "./TitleSubtitle.astro";
+
+const header = await fetchBuilderContent(BUILDER_URLS.home.header);
 ---
 
 <footer class="text-stone-800 mt-12">
   <TitleSubtitle
     isDark
-    title="Fugaz & Co."
-    subtitle="Consultoria Gastronomica"
+    title={header[0].data.title}
+    subtitle={header[0].data.desc}
   />
 </footer>

@@ -5,7 +5,13 @@ const { src, name, desc, role } = Astro.props;
 ---
 
 <li class="font-serif min-w-[80vw] md:min-w-[30vw] flex flex-col gap-2">
-  <Image src={src} alt={name} class="w-full h-[50vh] md:h-[30vw]" />
+  <Image
+    src={src}
+    alt={name}
+    class="w-full h-[50vh] md:h-[30vw] object-cover"
+    width="800"
+    height={800}
+  />
   <h1 class="font-bold text-2xl">{name}</h1>
   <span class="text-xl text-orange-500">{role}</span>
   <p class="max-w-[60vw]">{desc}</p>

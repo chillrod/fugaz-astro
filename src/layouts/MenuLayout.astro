@@ -2,6 +2,11 @@
 import { ViewTransitions } from "astro:transitions";
 import MenuIcon from "../components/MenuIcon.astro";
 import Navbar from "../components/Navbar.astro";
+import { BUILDER_URLS, fetchBuilderContent } from "../services/builder-io";
+
+const commonTextsResult = await fetchBuilderContent(BUILDER_URLS.common);
+const headerTextsResult = await fetchBuilderContent(BUILDER_URLS.home.header);
+
 ---
 
 <html lang="en">
@@ -9,14 +14,14 @@ import Navbar from "../components/Navbar.astro";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Fugaz & Co - Menu</title>
+    <title>{headerTextsResult[0].data.title}</title>
     <ViewTransitions />
   </head>
   <body>
     <Navbar>
       <div slot="menu">
         <a href="/">
-          <MenuIcon name="ant-design:close-outlined" text="Close" />
+          <MenuIcon name="ant-design:close-outlined" text={commonTextsResult[0].data.close} />
         </a>
       </div>
     </Navbar>

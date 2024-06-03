@@ -1,15 +1,23 @@
 ---
+import { BUILDER_URLS, fetchBuilderContent } from "../services/builder-io";
 import MenuIcon from "./MenuIcon.astro";
 
 const { page } = Astro.props;
+
+const commonTextsResult = await fetchBuilderContent(BUILDER_URLS.common);
 ---
 
-<nav class="h-12 flex justify-between items-center sticky top-5 z-50 font-serif">
+<nav
+  class="h-12 flex justify-between items-center sticky top-5 z-50 font-serif"
+>
   <ul class="flex items-center gap-6">
     <li class="flex items-center gap-4 text-stone-800">
       <slot name="menu">
         <a href="/menu">
-          <MenuIcon name="ant-design:menu-outlined" text="Menu" />
+          <MenuIcon
+            name="ant-design:menu-outlined"
+            text={commonTextsResult[0].data.menu}
+          />
         </a>
       </slot>
     </li>

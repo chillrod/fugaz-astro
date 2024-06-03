@@ -1,17 +1,14 @@
 ---
 import HeaderImage from "./HeaderImage.astro";
-import Picture4 from "../assets/picture6.jpeg";
-import Picture5 from "../assets/picture7.jpeg";
-import { clients } from "../data/clients";
 import TitleSubtitle from "./TitleSubtitle.astro";
 import BorderContent from "./BorderContent.astro";
+import type { ClientModel } from "../interfaces/ClientModel";
 
-const headerImages = clients.map((client, index) => {
-  return {
-    src: index % 2 === 0 ? Picture4 : Picture5,
-    alt: client.name,
-  };
-});
+interface Props {
+  clients: ClientModel[];
+}
+
+const { clients } = Astro.props;
 ---
 
 <BorderContent>
@@ -19,20 +16,27 @@ const headerImages = clients.map((client, index) => {
     <h3 class="text-4xl font-bold mt-6 text-stone-800">Saiba mais</h3>
     <ul class="flex gap-12 overflow-auto py-6">
       {
-        headerImages.map((headerImage) => (
-          <li class="min-w-[50vw] lg:min-w-[50vw] h-[30vh]">
-            <a href={headerImage.alt}>
-              <HeaderImage src={headerImage.src} alt={headerImage.alt}>
-                <div slot="title-subtitle">
-                  <TitleSubtitle
-                    title="Nome do cliente"
-                    subtitle="Descrição do cliente"
-                  />
-                </div>
-              </HeaderImage>
-            </a>
-          </li>
-        ))
+        clients.map((client) => {
+          const { data } = client;
+
+          return (
+            <li class="min-w-[50vw] lg:min-w-[50vw] h-[30vh]">
+              <a href={data.slug}>
+                <HeaderImage
+                  src={data.imagemPaginaPrincipal.src}
+                  alt={data.detalhamentoImagemPrincipal.alt}
+                >
+                  <div slot="title-subtitle">
+                    <TitleSubtitle
+                      title={data.nome}
+                      subtitle={data.descricao}
+                    />
+                  </div>
+                </HeaderImage>
+              </a>
+            </li>
+          );
+        })
       }
     </ul>
   </div>
