@@ -8,7 +8,7 @@ const infoTextsResult = await fetchBuilderContent(BUILDER_URLS.info);
 ---
 
 <div
-  class="text-3xl text-center flex flex-col md:flex-row place-items-center justify-center gap-6"
+  class="text-3xl text-center flex flex-col md:flex-row place-items-center justify-center gap-6 text-orange-500 font-bold"
 >
   <a
     href=`mailto:${infoTextsResult[0].data.email}?subject=${commonTextsResult[0].data.assuntoDoEmail}&body=${commonTextsResult[0].data.textoDoEmail}`

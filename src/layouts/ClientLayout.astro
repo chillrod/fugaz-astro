@@ -44,18 +44,10 @@ const filteredClients = clientsAPIResult.filter(
         </a>
       </div>
     </Navbar>
-    <BorderContent>
-      <slot />
-    </BorderContent>
+    <slot />
     <BorderContent>
       <MailContact />
     </BorderContent>
     <KnowMoreClients clients={filteredClients} />
-    <style is:global>
-      :root {
-        background-color: theme("colors.stone.100");
-        padding: theme("spacing.4");
-      }
-    </style>
   </body>
 </html>

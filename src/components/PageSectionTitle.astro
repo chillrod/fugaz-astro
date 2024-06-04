@@ -8,9 +8,9 @@ interface Props {
 const { text, description, left } = Astro.props;
 ---
 
-<div class=`${left ? '' : 'text-center'} flex flex-col gap-6 text-stone-800`>
-  <h2 class="text-[7vw] -tracking-wide font-semibold leading-[1.5ch]">
+<div class=`${left ? '' : 'text-center'} flex flex-col gap-6 text-orange-500 bg-grid bg-grid-size p-6`>
+  <h2 class="text-[15vw] md:text-[7vw] -tracking-wider font-bold leading-[1.5ch]">
     {text}
   </h2>
-  <p class="text-2xl font-normal">{description}</p>
+  <p class="text-4xl font-normal bg-stone-100 rounded-lg">{description}</p>
 </div>
