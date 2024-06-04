@@ -10,6 +10,7 @@ import { fetchBuilderContent, BUILDER_URLS } from "../services/builder-io";
 import type { ClientModel } from "../interfaces/ClientModel";
 import type { HomeModel } from "../interfaces/HomeModel";
 import type { ServicesModel } from "../interfaces/ServicesModel";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const clientsAPIResult: ClientModel[] = await fetchBuilderContent(
   BUILDER_URLS.clients
@@ -23,105 +24,97 @@ const servicesApiResult: ServicesModel[] = await fetchBuilderContent(
 );
 ---
 
-<Layout title={homeApiResult[0].data.title}>
-  <div class="text-stone-800 font-serif">
-    <main class="flex flex-col gap-12">
-      <div class="text-stone-800">
-        <h1
-          class="text-center text-[35vw] md:text-[21vw] -tracking-widest leading-[1.8ch]"
-        >
-          {homeApiResult[0].data.title}
-        </h1>
-        <div class="text-right text-[4vw] md:text-[2.5vw]">
-          <span>
+<BaseLayout>
+  <div class="bg-star bg-no-repeat bg-posi-star bg-star-sm md:bg-star-md">
+    <Layout title={homeApiResult[0].data.title}>
+      <main class="grid gap-12 mt-12">
+        <div class="bg-grid bg-grid-size">
+          <h1
+            class="text-left font-bold text-orange-500 text-[40vw] md:text-[22vw] -tracking-widest leading-[1.8ch]"
+          >
+            {homeApiResult[0].data.title}
+          </h1>
+          <h2 class="text-right font-bold text-[5vw] md:text-[3vw]">
             {homeApiResult[0].data.desc}
-          </span>
+          </h2>
         </div>
-      </div>
-    </main>
+      </main>
 
-    <section id="#headerimages">
-      <BorderContent>
+      <section id="#headerimages" class="py-12">
         <HeaderImages clients={clientsAPIResult} />
-      </BorderContent>
-    </section>
+      </section>
 
-    <section id="clients">
-      <BorderContent>
-        <PageSectionTitle text={homeApiResult[0].data.textoClientes} />
+      <section id="clients" class="bg-orange-50 p-4 rounded-lg">
+        <BorderContent>
+          <PageSectionTitle text={homeApiResult[0].data.textoClientes} />
 
-        <ul class="flex items-center gap-6 overflow-auto py-6">
-          {
-            clientsAPIResult.map((client) => {
-              const { data } = client;
+          <ul class="flex items-center gap-6 overflow-auto py-6">
+            {
+              clientsAPIResult.map((client) => {
+                const { data } = client;
 
-              return (
-                <li class="text-center text-[8vw] bg-orange-600 text-stone-200">
-                  <a href={data.slug}>{data.nome}</a>
-                </li>
-              );
-            })
-          }
-        </ul>
-        <div class="h-[40vh]">
-          <Image
-            src={homeApiResult[0].data.fotoAbaixoClientes.src}
-            alt={homeApiResult[0].data.fotoAbaixoClientes.alt}
-            class="w-full h-full object-cover"
-            width="800"
-            height="800"
-          />
-        </div>
-      </BorderContent>
+                return (
+                  <li class="text-center font-bold text-[10vw] md:text-[5vw] bg-orange-600 text-stone-100">
+                    <a href={data.slug}>{data.nome}</a>
+                  </li>
+                );
+              })
+            }
+          </ul>
+          <div class="h-[40vh]">
+            <Image
+              src={homeApiResult[0].data.fotoAbaixoClientes.src}
+              alt={homeApiResult[0].data.fotoAbaixoClientes.alt}
+              class="w-full h-full object-cover"
+              width="800"
+              height="800"
+            />
+          </div>
+        </BorderContent>
+      </section>
 
       <section id="services">
         <BorderContent>
-          <div class="grid grid-rows-1 gap-12">
-            <div class="order-2 flex flex-col gap-12">
-              <div class="flex gap-6 flex-col justify-center text-center">
-                <PageSectionTitle text={homeApiResult[0].data.textoServicos} />
-                {
-                  servicesApiResult[0].data.servicos.map((summary) => {
-                    return (
-                      <div class="flex items-center gap-2 justify-center">
-                        <details class="text-4xl ">
-                          <summary class="cursor-pointer">
-                            {summary.titulo}
-                          </summary>
-                          <p class="text-2xl">{summary.descricao}</p>
-                        </details>
-                      </div>
-                    );
-                  })
-                }
-              </div>
+          <div class="grid gap-4">
+            <div
+              class="order-2 md:text-center flex flex-col gap-4 bg-orange-50 p-8 rounded-lg"
+            >
+              <PageSectionTitle text={homeApiResult[0].data.textoServicos} />
+              {
+                servicesApiResult[0].data.servicos.map((summary) => {
+                  return (
+                    <details class="text-4xl ">
+                      <summary class="cursor-pointer">{summary.titulo}</summary>
+                      <p class="text-2xl">{summary.descricao}</p>
+                    </details>
+                  );
+                })
+              }
             </div>
+          </div>
 
-            <div class="grid grid-cols-2 gap-6">
-              <div class="cols-span-1 h-[50vh] w-full">
-                <Image
-                  src={homeApiResult[0].data.fotoAbaixoClientes.src}
-                  alt={homeApiResult[0].data.fotoAbaixoClientes.alt}
-                  class="w-full h-full object-cover"
-                  width="800"
-                  height="800"
-                />
-              </div>
-              <div class="grid cols-span-2 grid-rows-2 gap-6 h-[50vh]">
-                {
-                  homeApiResult[0].data.fotoAcimaservicos.Default.map(
-                    (foto) => (
-                      <Image
-                        src={foto.imagens.src}
-                        alt={foto.imagens.alt}
-                        class="w-full h-full object-cover"
-                        width="800"
-                        height="800"
-                      />
-                    )
-                  )
-                }
-              </div>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="cols-span-1 h-[50vh] w-full hidden md:block">
+              <Image
+                src={homeApiResult[0].data.fotoAbaixoClientes.src}
+                alt={homeApiResult[0].data.fotoAbaixoClientes.alt}
+                class="w-full h-full object-cover"
+                width="800"
+                height="800"
+              />
+            </div>
+            <div class="grid cols-span-2 grid-rows-2 gap-6 h-[50vh]">
+              {
+                homeApiResult[0].data.fotoAcimaservicos.Default.map((foto) => (
+                  <Image
+                    src={foto.imagens.src}
+                    alt={foto.imagens.alt}
+                    class="w-full h-full object-cover"
+                    width="800"
+                    height="800"
+                  />
+                ))
+              }
             </div>
           </div>
         </BorderContent>
@@ -129,12 +122,12 @@ const servicesApiResult: ServicesModel[] = await fetchBuilderContent(
 
       <section id="contact">
         <BorderContent>
-          <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-6 bg-orange-50 p-8 rounded-lg">
             <PageSectionTitle text={homeApiResult[0].data.textoContato} />
             <MailContact />
           </div>
         </BorderContent>
       </section>
-    </section>
+    </Layout>
   </div>
-</Layout>
+</BaseLayout>

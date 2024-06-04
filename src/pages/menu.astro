@@ -1,8 +1,11 @@
 ---
 import MenuComponent from "../components/MenuComponent.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import MenuLayout from "../layouts/MenuLayout.astro";
 ---
 
-<MenuLayout>
-  <MenuComponent />
-</MenuLayout>
+<BaseLayout>
+  <MenuLayout>
+    <MenuComponent />
+  </MenuLayout>
+</BaseLayout>

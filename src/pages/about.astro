@@ -12,6 +12,7 @@ import { BUILDER_URLS, fetchBuilderContent } from "../services/builder-io";
 import type { AboutModel } from "../interfaces/AboutModel";
 import type { TeamModel } from "../interfaces/TeamModel";
 import type { HomeModel } from "../interfaces/HomeModel";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const aboutResult: AboutModel[] = await fetchBuilderContent(BUILDER_URLS.about);
 const headerApiResult: HomeModel[] = await fetchBuilderContent(
@@ -20,147 +21,151 @@ const headerApiResult: HomeModel[] = await fetchBuilderContent(
 const teamsResult: TeamModel[] = await fetchBuilderContent(BUILDER_URLS.equipe);
 ---
 
-<MenuLayout title={aboutResult[0].data.tituloSecao1}>
-  <div class="md:max-w-[80vw] m-auto font-serif">
-    <BorderContent>
-      <div class="font-serif font-bold text-stone-800 grid grid-cols-2 gap-6">
-        <div class="col-span-2 self-center text-center grid gap-6">
+<BaseLayout>
+  <MenuLayout title={aboutResult[0].data.tituloSecao1}>
+    <div class="md:max-w-[80vw] m-auto">
+      <BorderContent>
+        <div class="font-serif font-bold grid grid-cols-2 gap-6">
+          <div class="col-span-2 self-center text-center grid gap-6">
+            <PageSectionTitle
+              text={aboutResult[0].data.tituloSecao1}
+              description={aboutResult[0].data.textoSecao1}
+            />
+          </div>
+
+          <ul
+            class="col-span-2 h-[50vh] flex w-full items-center overflow-auto gap-6"
+          >
+            <li class="h-full w-[50%]">
+              <Image
+                src={aboutResult[0].data.imagem1.src}
+                alt={aboutResult[0].data.imagem1.alt}
+                class="w-full h-full object-cover"
+                width="800"
+                height="800"
+              />
+            </li>
+            <li class="h-full w-full">
+              <Image
+                src={aboutResult[0].data.imagem2.src}
+                alt={aboutResult[0].data.imagem2.alt}
+                class="w-full h-full object-cover"
+                width="800"
+                height="800"
+              />
+            </li>
+            <li class="h-full w-[50%]">
+              <Image
+                src={aboutResult[0].data.imagem3.src}
+                alt={aboutResult[0].data.imagem3.alt}
+                class="w-full h-full object-cover"
+                width="800"
+                height="800"
+              />
+            </li>
+          </ul>
+        </div>
+      </BorderContent>
+      <BorderContent>
+        <div class="col-span-2 self-center text-center pb-12">
           <PageSectionTitle
-            text={aboutResult[0].data.tituloSecao1}
-            description={aboutResult[0].data.textoSecao1}
+            text={aboutResult[0].data.tituloSecao2}
+            description={aboutResult[0].data.textoSecao2}
           />
         </div>
 
         <ul
-          class="col-span-2 h-[50vh] flex w-full items-center overflow-auto gap-6"
+          class="text-center md:text-left flex flex-col md:grid md:grid-cols-3 gap-4 mt-12"
         >
-          <li class="h-full w-[50%]">
-            <Image
-              src={aboutResult[0].data.imagem1.src}
-              alt={aboutResult[0].data.imagem1.alt}
-              class="w-full h-full object-cover"
-              width="800"
-              height="800"
-            />
-          </li>
-          <li class="h-full w-full">
-            <Image
-              src={aboutResult[0].data.imagem2.src}
-              alt={aboutResult[0].data.imagem2.alt}
-              class="w-full h-full object-cover"
-              width="800"
-              height="800"
-            />
-          </li>
-          <li class="h-full w-[50%]">
-            <Image
-              src={aboutResult[0].data.imagem3.src}
-              alt={aboutResult[0].data.imagem3.alt}
-              class="w-full h-full object-cover"
-              width="800"
-              height="800"
-            />
-          </li>
-        </ul>
-      </div>
-    </BorderContent>
-    <BorderContent>
-      <div class="col-span-2 self-center text-center pb-12">
-        <PageSectionTitle
-          text={aboutResult[0].data.tituloSecao2}
-          description={aboutResult[0].data.textoSecao2}
-        />
-      </div>
-
-      <ul
-        class="text-center md:text-left flex flex-col md:grid md:grid-cols-3 gap-4 mt-12"
-      >
-        {
-          aboutResult[0].data.listaCompetenciasSecao2.map((content) => {
-            return (
-              <li>
-                <AboutContent
-                  title={content.titulo}
-                  description={content.desc}
-                />
-              </li>
-            );
-          })
-        }
-      </ul>
-    </BorderContent>
-
-    <BorderContent>
-      <div
-        class="flex flex-col justify-center text-center md:text-left md:grid md:grid-cols-3 gap-12 mt-12"
-      >
-        <div class="col-span-3 text-center">
-          <PageSectionTitle
-            text={aboutResult[0].data.tituloSecao3}
-            description={aboutResult[0].data.textoSecao3}
-          />
-        </div>
-        {
-          aboutResult[0].data.listaCompetenciasSecao3.map((content) => {
-            return (
-              <li class="list-none">
-                <AboutContent
-                  title={content.titulo}
-                  isStacked
-                  description={content.skills
-                    .map((skill) => skill.competencia)
-                    .join(", ")}
-                />
-              </li>
-            );
-          })
-        }
-        <div class="hidden md:block col-span-2 h-[80%] w-full">
-          <Image
-            src={aboutResult[0].data.imagem4.src}
-            alt={aboutResult[0].data.imagem4.alt}
-            class="w-full h-full object-cover"
-            width="800"
-            height="800"
-          />
-        </div>
-      </div>
-    </BorderContent>
-
-    <BorderContent>
-      <div class="flex flex-col md:grid grid-cols-3 gap-6">
-        <div>
-          <PageSectionTitle
-            left
-            text={aboutResult[0].data.tituloNossaEquipe}
-            description={aboutResult[0].data.textoNossaEquipe}
-          />
-        </div>
-
-        <ul class="col-span-2 w-full flex gap-6 overflow-auto py-6">
           {
-            teamsResult.map((team) => {
+            aboutResult[0].data.listaCompetenciasSecao2.map((content) => {
               return (
                 <li>
-                  <TeamCard
-                    name={team.data.nome}
-                    src={team.data.foto.src}
-                    role={team.data.cargo}
-                    desc={team.data.descricao}
+                  <AboutContent
+                    title={content.titulo}
+                    description={content.desc}
                   />
                 </li>
               );
             })
           }
         </ul>
-      </div>
-    </BorderContent>
+      </BorderContent>
 
-    <BorderContent>
-      <div class="grid place-items-center">
-        <TitleSubtitle isDark title={headerApiResult[0].data.title} />
-        <MailContact />
-      </div>
-    </BorderContent>
-  </div>
-</MenuLayout>
+      <BorderContent>
+        <div
+          class="flex flex-col justify-center text-center md:text-left md:grid md:grid-cols-3 gap-12 mt-12"
+        >
+          <div class="col-span-3 text-center">
+            <PageSectionTitle
+              text={aboutResult[0].data.tituloSecao3}
+              description={aboutResult[0].data.textoSecao3}
+            />
+          </div>
+          {
+            aboutResult[0].data.listaCompetenciasSecao3.map((content) => {
+              return (
+                <li class="list-none">
+                  <AboutContent
+                    title={content.titulo}
+                    isStacked
+                    description={content.skills
+                      .map((skill) => skill.competencia)
+                      .join(", ")}
+                  />
+                </li>
+              );
+            })
+          }
+          <div class="hidden md:block col-span-2 h-[80%] w-full">
+            <Image
+              src={aboutResult[0].data.imagem4.src}
+              alt={aboutResult[0].data.imagem4.alt}
+              class="w-full h-full object-cover"
+              width="800"
+              height="800"
+            />
+          </div>
+        </div>
+      </BorderContent>
+
+      <BorderContent>
+        <div class="flex flex-col md:grid grid-cols-3 gap-6">
+          <div>
+            <PageSectionTitle
+              left
+              text={aboutResult[0].data.tituloNossaEquipe}
+              description={aboutResult[0].data.textoNossaEquipe}
+            />
+          </div>
+
+          <ul class="col-span-2 w-full flex gap-6 overflow-auto py-6">
+            {
+              teamsResult.map((team) => {
+                return (
+                  <li>
+                    <TeamCard
+                      name={team.data.nome}
+                      src={team.data.foto.src}
+                      role={team.data.cargo}
+                      desc={team.data.descricao}
+                    />
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </div>
+      </BorderContent>
+
+      <BorderContent>
+        <div class="grid place-items-center">
+          <h2 class="-tracking-widest text-6xl font-bold">
+            {headerApiResult[0].data.title}
+          </h2>
+          <MailContact />
+        </div>
+      </BorderContent>
+    </div>
+  </MenuLayout>
+</BaseLayout>

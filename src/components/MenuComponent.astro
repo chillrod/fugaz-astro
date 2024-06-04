@@ -4,7 +4,7 @@ import MenuIcon from "./MenuIcon.astro";
 import TitleSubtitle from "./TitleSubtitle.astro";
 import { BUILDER_URLS, fetchBuilderContent } from "../services/builder-io";
 import type { ClientModel } from "../interfaces/ClientModel";
-
+import BorderContent from "./BorderContent.astro";
 
 const commonTextsResult = await fetchBuilderContent(BUILDER_URLS.common);
 const headerApiResult = await fetchBuilderContent(BUILDER_URLS.home.header);
@@ -48,53 +48,51 @@ const menuIcons = [
     url: commonTextsResult[0].data.spotify,
   },
 ];
-
 ---
 
 <div
-  class="h-[100vh] grid md:grid-cols-2 gap-12 p-6 text-5xl font-serif font-medium text-stone-800"
+  class="h-[100vh] w-full grid md:grid-cols-2 gap-12 py-6 text-4xl font-bold"
 >
-  <div class="">
-    <ul class="flex flex-col gap-6">
-      {
-        menuLinks.map((link) => (
-          <li>
-            <a class="hover:underline decoration-3" href={link.url}>
-              {link.name}
-            </a>
-          </li>
-        ))
-      }
+  <div class="grid gap-4">
+    <BorderContent>
+      <ul class="flex flex-col gap-6">
+        {
+          menuLinks.map((link) => (
+            <li>
+              <a class="hover:underline decoration-2" href={link.url}>
+                <p class="text-6xl text-orange-500">{link.name}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </BorderContent>
+
+    <ul class="bg-grid bg-grid-size font-normal">
       {
         menuIcons.map((icon) => (
           <li>
             <a href={icon.url} target="_blank">
-              <MenuIcon big name={icon.name} text={icon.text} />
+              <MenuIcon name={icon.name} text={icon.text} />
             </a>
           </li>
         ))
       }
     </ul>
   </div>
-  <div class="flex flex-col gap-6">
-    <h2>{commonTextsResult[0].data.nossosClientes}</h2>
+  <div class="flex flex-col gap-4 bg-grid bg-grid-size">
+    <h2 class="text-4xl text-orange-500">
+      {commonTextsResult[0].data.nossosClientes}
+    </h2>
 
-    <ul class="flex flex-col gap-6 text-2xl">
+    <ul class="flex flex-col gap-4 text-2xl">
       {
         clientsApiResult.map((client) => {
           const { data } = client;
           return (
-            <li class="border-stone-800 border-b-2 border-dashed">
-              <a class="hover:underline decoration-dashed" href={data.slug}>
-                {data.nome}
-              </a>
-              <a
-                href={data.instagram}
-                target="_blank"
-                class="text-base flex items-center gap-2"
-              >
-                <Icon name="ant-design:instagram" />
-                Instagram
+            <li class="bg-stone-100  rounded-lg font-normal">
+              <a href={data.slug}>
+                <p class="text-4xl">{data.nome}</p>
               </a>
             </li>
           );
@@ -102,5 +100,7 @@ const menuIcons = [
       }
     </ul>
   </div>
-  <TitleSubtitle isDark title={headerApiResult[0].data.title} />
+  <h2 class="-tracking-widest text-6xl font-bold">
+    {headerApiResult[0].data.title}
+  </h2>
 </div>

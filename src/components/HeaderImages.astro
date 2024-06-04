@@ -25,7 +25,7 @@ const headerContents = clients.slice(0, 8).map((client, id) => {
 });
 ---
 
-<div class="grid grid-cols-1 lg:grid-cols-3 md:grid-rows-3 md:h-[100vh] gap-2">
+<div class="flex flex-col md:grid lg:grid-cols-3 md:grid-rows-3 md:h-[100vh] gap-2 w-full">
   {
     headerContents.map((content) => {
       return (
