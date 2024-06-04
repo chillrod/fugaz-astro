@@ -8,7 +8,7 @@ interface Props {
 }
 const { clients } = Astro.props;
 
-const headerContents = clients.slice(0, 8).map((client, id) => {
+const headerContents = clients.slice(0, 5).map((client, id) => {
   const { data } = client;
 
   const divClasses =
